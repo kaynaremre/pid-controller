@@ -31,8 +31,30 @@ class PID {
    */
   double TotalError();
 
- private:
-  /**
+  // double getKp(){
+  //   return Kp;
+  // }
+
+  // double getKi(){
+  //   return Ki;
+  // }
+
+  // double getKd(){
+  //   return Kd;
+  // }
+
+  // void setKp(double kp){
+  //   this->Kp = kp;
+  // }
+  // void setKi(double ki){
+  //   this->Ki = ki;
+  // }
+
+  // void setKd(double kd){
+  //   this->Kd = kd;
+  // }
+
+   /**
    * PID Errors
    */
   double p_error;
