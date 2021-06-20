@@ -1,7 +1,7 @@
 #include "PID.h"
 
 /**
- * TODO: Complete the PID class. You may add any additional desired functions.
+ * TODO: Complete the PID class. You may add any additional desired functions.aaa
  */
 
 PID::PID() {}
@@ -26,7 +26,7 @@ void PID::UpdateError(double cte) {
   /**
    * TODO: Update PID errors based on cte.
    */
-  d_error = cte - p_error; // p_error is the previous cte
+  d_error = (cte - p_error); // p_error is the previous cte
   p_error = cte;
   i_error += cte;
 }

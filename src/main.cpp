@@ -4,10 +4,14 @@
 #include <string>
 #include "json.hpp"
 #include "PID.h"
+#include <ctime>
+
 
 // for convenience
 using nlohmann::json;
 using std::string;
+using std::cout;
+
 
 // For converting back and forth between radians and degrees.
 constexpr double pi() { return M_PI; }
@@ -30,16 +34,21 @@ string hasData(string s) {
   return "";
 }
 
+std::clock_t tmp;
+
+
 int main() {
   uWS::Hub h;
 
   PID pid;
+
+
   /**
    * TODO: Initialize the pid variable.
    */
-  double init_Kp = 0.08;
-  double init_Ki = 0 ;
-  double init_Kd = 2.5;
+  double init_Kp = 0.1;
+  double init_Ki = 0.0001 ;
+  double init_Kd = 500;
   
   pid.Init(init_Kp, init_Ki, init_Kd);
 
@@ -78,12 +87,17 @@ int main() {
             steer_value = -1;
           }
           // DEBUG
+          const std::clock_t begin_time = clock();
+
+          cout << begin_time - tmp << std::endl;
+          tmp = begin_time;
+
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
                     << std::endl;
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = 0.3;
+          msgJson["throttle"] = 0.5;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
